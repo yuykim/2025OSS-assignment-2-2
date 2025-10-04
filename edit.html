@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>edit Player</title>
+    <link rel="stylesheet" href="my.css">
+    <script>
+        function checkcheck() {
+            event.preventDefault();
+            const firstname = document.getElementById('firstname').value.trim();
+            const backname = document.getElementById('backname').value.trim();
+            const old = document.getElementById('old').value;
+            const height = document.getElementById('cm').value;
+            const weight = document.getElementById('kg').value;
+            const backnumber = document.getElementById('backnumber').value;
+            const position = document.getElementById('select_position').value;
+
+            const koreanRegex = /^[가-힣]*$/;
+
+            let errorMessage = '';
+
+            if (position === '포지션') {
+                errorMessage += '포지션을 선택하세요.\n';
+            }
+            if (!firstname) {
+                errorMessage += '성을 입력하세요.\n';
+            }
+            if (firstname && !koreanRegex.test(firstname) && !(firstname>2)) {
+                errorMessage += '성을 1~2 글자를 한글로 입력하세요\n'
+            } 
+            if (!backname) {
+                errorMessage += '이름을 입력하세요.\n';
+            }
+            if (backname && !koreanRegex.test(backname)) {
+                errorMessage += '이름을 한글로 입력하세요\n'
+            } 
+            if (old < 14 || old > 55) {
+                errorMessage += '나이는 만 14세 이상, 만 55세 이하여야 합니다.\n'
+            } 
+            if (height < 140 || height > 240) {
+                errorMessage += '키는 140cm에서 240cm 사이여야 합니다.\n';
+            }
+            if (weight < 40 || weight > 150) {
+                errorMessage += '몸무게는 40kg에서 200kg 사이여야 합니다.\n';
+            }
+            if (backnumber < 1 || backnumber > 99) {
+                errorMessage += '등번호는 1에서 99 사이여야 합니다.\n';
+            }
+            
+
+            if (errorMessage) {
+                alert(errorMessage);
+            } else {
+                alert("모든 입력이 유효합니다.");
+                showConfirm()
+            }
+        }
+        function showConfirm() {
+            var result = confirm("게시물을 수정할까요?");
+            if (result) {
+                alert("수정 하였습니다.");
+                document.getElementById('playerForm').submit();
+            } 
+        }
+    
+    </script>
+</head>
+<!--
+제작하고 싶은 CRUD Front page의 주제를 결정, 
+어떤 항목들로 데이터 세트를 구성할 것인지 정한다. (6개 이상의 항목이 포함되어야 함)
+
+(축구선수)
+등번호 - 이름 - 포지션 - 국적 - 키 - 몸무게 - 나이 
+
+edit.html 제작
+- 임의로 넣은 레코드의 모든 항목을 보여주면서 수정할 수 있도록 하는 Form 페이지
+- add.html과 동일한 Validation Check Javascript 적용할 것
+- [확인] 버튼을 누르면 “게시물을 수정할까요?” Confirm 창 띄울 것
+- [취소] 버튼을 누르면 index.html로 이동할 것.
+-->
+<body class="body_addedit">
+    <div class="container">
+        <form action="index.html" id="playerForm">
+            <div class="mb-3">
+                <!-- 1. 포지션 입력받기 -->
+                <label for="select_position">포지션</label>
+                <select id="select_position" name="position" class="form-select" aria-label="Default select example">
+                    <option selected>FW</option>
+                    <option value="MF">MF</option>
+                    <option value="DF">DF</option>
+                    <option value="GK">GK</option>
+                </select>
+            </div>
+
+            <div class="row" id="name">
+                <div class="col">
+                    <label for="firstname">성</label>
+                    <input type="text" id="firstname" class="form-control" placeholder="성" aria-label="First name" value="손">
+                </div>
+                <div class="col">
+                    <label for="backname">이름</label>
+                    <input type="text" id="backname" class="form-control" placeholder="이름" aria-label="Last name" value="흥민">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="cm_required" class="form-label">나이</label>
+                <input class="form-control" type="number" id="old" name="old_required" placeholder="(만) 세" value="33">
+            </div>
+
+            <div class="mb-3">
+                <label for="cm_required" class="form-label">키</label>
+                <input class="form-control" type="number" id="cm" name="cm_required" placeholder="키(cm)" value="183">
+            </div>
+
+            <div class="mb-3">
+                <label for="kg_required" class="form-label">몸무게</label>
+                <input class="form-control" type="number" id="kg" name="kg_required" placeholder="몸무게(kg)" value="78">
+            </div>
+
+            <div class="mb-3">
+                <label for="backnumber_required" class="form-label">등번호</label>
+                <input class="form-control" type="number" id="backnumber" name="backnumber_required" placeholder="등번호" value="7">
+            </div>
+
+            <div class="mb-3">
+                <label>주발</label>
+                <div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="left">
+                        <label class="form-check-label" for="flexRadioDefault1">왼발</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="right">
+                        <label class="form-check-label" for="flexRadioDefault2">오른발</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" value="both" checked>
+                        <label class="form-check-label" for="flexRadioDefault3" cheked>양발</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 제출 버튼 -->
+            <button type="submit" class="btn btn-primary butt1" onclick="checkcheck()">제출</button>
+            <a class="btn btn-danger butt3" href="index.html" role="button">취소</a>
+        </form>
+    </div>
+</body>
+</html>

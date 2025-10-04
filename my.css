@@ -1,0 +1,161 @@
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+    background-color: red;
+}
+
+.row.content {height: 450px;}
+
+.sidenav {
+    margin-top: 10px;
+    height: 100%;
+    background-color: #f1f1f1;
+}
+
+.navbar-header{
+    height: 100px;
+    width: auto;
+}
+
+#add{
+    font-weight: 600;
+    font-size: large;
+    border: solid;
+    padding: 10px;
+    margin: 20px;
+    float: left;
+    color: white;
+}
+
+.sideimg{
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
+.logo{
+    height: 90%;
+    width: auto;
+}
+
+@media only screen and (max-width: 768px) {
+    .sidenav {
+        display: none;
+    }
+    .row.content {
+        height: auto;
+    }
+    .navbar-header {
+        display: flex;
+        align-items: center;
+    }
+    #add {
+        margin: 0;
+        padding: 10px;
+        float: none;
+}
+}
+
+@media only screen and (max-width: 500px) {
+    .sidenav {
+        display: none;
+    }
+    .row.content {
+        height: auto;
+    }
+    .navbar-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #add {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        margin: 0;
+        padding: 7px 14px;
+        background-color: red;
+        color: white;
+        border-radius: 5px;
+        z-index: 1000;
+    }
+    .logo {
+        margin-bottom: 10px;
+    }
+}
+
+.body_addedit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 110vh;
+    margin: 0;
+    background-color: #f1f1f1;
+}
+.container {
+    position: relative;
+    width: 500px;
+    height: auto;
+    background-color: cornsilk;
+    padding: 20px;
+}
+.butt1, .butt2, .butt3{
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+}
+div{
+    margin-top: 5px;
+}
+@media (max-width: 600px) {
+    .row {
+        flex-direction: column;
+    }
+    .col {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .body_addedit{
+        height: 100vh;
+    }
+}
+
+
+
+
+
+.header {
+    background-color: red;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; 
+    height: 100px; 
+    padding-left: 20px; 
+  }
+  .butt12{
+      margin-left: 5px;
+  }
+  .butt{
+      margin-left: 5px;
+      visibility: hidden; 
+  }
+  .logo{
+      height: 100%;
+      width: auto;
+  }
+  .body_view{
+      font-size: 16px;
+  }
+  @media (max-width: 600px) {
+    .body_view {
+        font-size: 12px;
+    }
+    .table th, .table td {
+        font-size: 12px;
+    }
+    .logo{
+        display: none;
+    }
+}
+  
+
