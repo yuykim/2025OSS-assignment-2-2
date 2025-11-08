@@ -1,0 +1,81 @@
+{
+  "players": [
+    {
+      "id": "1",
+      "name": "Lionel Messi",
+      "height": 169,
+      "weight": 67,
+      "number": 10
+    },
+    {
+      "id": "2",
+      "name": "Cristiano Ronaldo",
+      "height": 187,
+      "weight": 83,
+      "number": 7
+    },
+    {
+      "id": "3",
+      "name": "Kylian Mbappé",
+      "height": 178,
+      "weight": 73,
+      "number": 7
+    },
+    {
+      "id": "4",
+      "name": "Erling Haaland",
+      "height": 194,
+      "weight": 88,
+      "number": 9
+    },
+    {
+      "id": "5",
+      "name": "Kevin De Bruyne",
+      "height": 181,
+      "weight": 70,
+      "number": 17
+    },
+    {
+      "id": "6",
+      "name": "Neymar Jr",
+      "height": 175,
+      "weight": 68,
+      "number": 10
+    },
+    {
+      "id": "7",
+      "name": "Virgil van Dijk",
+      "height": 193,
+      "weight": 92,
+      "number": 4
+    },
+    {
+      "id": "8",
+      "name": "Mohamed Salah",
+      "height": 175,
+      "weight": 71,
+      "number": 11
+    },
+    {
+      "id": "9",
+      "name": "Harry Kane",
+      "height": 188,
+      "weight": 86,
+      "number": 9
+    },
+    {
+      "id": "10",
+      "name": "Son Heung-min",
+      "height": 183,
+      "weight": 78,
+      "number": 7
+    },
+    {
+      "id": "11",
+      "name": "김유영",
+      "height": 175,
+      "weight": 72,
+      "number": 12
+    }
+  ]
+}

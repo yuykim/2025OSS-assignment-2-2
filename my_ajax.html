@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>22100162 Assignment#4-1: Javascript Practice</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<body>
+    
+    <h2>유명 축구 선수 목록</h2>
+    <div id="div_list"></div>
+    
+
+    id : <input type="text" id="input_id"><br>
+    name : <input type="text" id="input_name"><br>
+    height : <input type="number" id="input_height"><br>
+    weight : <input type="number" id="input_weight"><br>
+    number : <input type="number" id="input_number"><br><br>
+    
+    <button id="btn_list">목록 보기 (Read)</button>
+    <button id="btn_add">입력하기 (Create)</button>
+    <button id="btn_update">수정하기 (Update)</button>
+    <button id="btn_delete">삭제하기 (Delete)</button>
+
+    <script>
+        // json-server --watch my_data.json --port 3000
+        $(function(){
+            function loadList(){
+                const xhr = new XMLHttpRequest();
+                xhr.open("GET","http://localhost:3000/players");
+                xhr.setRequestHeader("content-type","application/json");
+                xhr.send();
+                xhr.onload = () => {
+                    if (xhr.status === 200) {
+                        let res = JSON.parse(xhr.response);
+                        $("#div_list").html("");    // 기존 목록 지우기
+                        res.forEach(function (each) {
+                            $("#div_list").append(
+                                `<div>
+                                    [${each.id}] ${each.name} / ${each.height}cm / ${each.weight}kg / No.${each.number}
+                                </div>`
+                            );
+                        });
+                    } else {
+                        console.log(xhr.status, xhr.statusText);
+                    }
+                }
+            }
+            function clearInputs() {
+                $("#input_id").val("");
+                $("#input_name").val("");
+                $("#input_height").val("");
+                $("#input_weight").val("");
+                $("#input_number").val("");
+            }
+
+
+            loadList();
+
+            $("#btn_list").click(function(){    loadList(); });
+
+            $("#btn_delete").click(function(){
+                 if (!$("#input_id").val()) {
+                    alert("삭제할 id를 입력하세요.");
+                    return;
+                }
+                const xhr = new XMLHttpRequest();
+                xhr.open("DELETE","http://localhost:3000/players/" +$("#input_id").val());
+                xhr.setRequestHeader("content-type","application/json");
+                xhr.send();
+                xhr.onload = () => {
+                    if (xhr.status === 200) {
+                        let res = JSON.parse(xhr.response);
+                    } else {
+                        console.log(xhr.status, xhr.statusText);
+                    }
+                }
+                loadList();
+                clearInputs()
+            });
+
+            $("#btn_update").click(function(){
+                if (!$("#input_id").val()) {
+                    alert("수정할 id를 입력하세요.");
+                    return;
+                }
+                if (
+                    !$("#input_name").val() ||
+                    !$("#input_height").val() ||
+                    !$("#input_weight").val() ||
+                    !$("#input_number").val()
+                ) {
+                    alert("선수의 이름, 키, 몸무게, 등번호를 빠짐없이 입력하세요.");
+                    return;
+                }
+                const xhr = new XMLHttpRequest();
+                xhr.open("PUT","http://localhost:3000/players/" + $("#input_id").val());
+                xhr.setRequestHeader("content-type","application/json");
+                let data = { 
+                    name: $("#input_name").val(), 
+                    height: Number($("#input_height").val()),
+                    weight: Number($("#input_weight").val()),
+                    number: Number($("#input_number").val())
+                };
+                xhr.send(JSON.stringify(data));
+                xhr.onload = () => {
+                    if (xhr.status === 200) {
+                        let res = JSON.parse(xhr.response);
+                        loadList();
+                    } else {
+                        console.log(xhr.status, xhr.statusText);
+                    }
+                }
+                loadList();
+                clearInputs()
+            });
+
+            let new_id = 10
+
+            $("#btn_add").click(function(){
+                if (
+                    !$("#input_name").val() ||
+                    !$("#input_height").val() ||
+                    !$("#input_weight").val() ||
+                    !$("#input_number").val()
+                ) {
+                    alert("선수의 이름, 키, 몸무게, 등번호를 빠짐없이 입력하세요.");
+                    return;
+                }
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST","http://localhost:3000/players");
+                xhr.setRequestHeader("content-type","application/json");
+                let data = { 
+                    name: String($("#input_name").val()), 
+                    height: Number($("#input_height").val()),
+                    weight: Number($("#input_weight").val()),
+                    number: Number($("#input_number").val())
+                };
+                xhr.send(JSON.stringify(data));
+                xhr.onload = () => {
+                    if (xhr.status === 200) {
+                        let res = JSON.parse(xhr.response);
+                    } else {
+                        console.log(xhr.status, xhr.statusText);
+                    }
+                }
+                loadList();
+                clearInputs()
+            });
+        });
+    </script>
+</body>
+</html>
